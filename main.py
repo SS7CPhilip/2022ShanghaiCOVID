@@ -9,27 +9,9 @@ import os
 #from geopy.geocoders import BaiduV3
 import csv
 
-'''
-# This function is used to slice a list every n elements
-def chunks(list_in, n):
-    # For item i in a range that is a length of l,
-    for i in range(0, len(list_in), n):
-        # Create an index range for l of n elements:
-        yield list_in[i:i+n]
-
-#Create a list of station you're going to get
-stationId_input = list(range(1,12))
-'''
 
 def bd09_to_gcj02(bd_lat, bd_lon):
     x_pi = 3.14159265358979324 * 3000.0 / 180.0
-    '''
-    百度坐标系(BD-09)转火星坐标系(GCJ-02)
-    百度——>谷歌、高德
-    :param bd_lat:百度坐标纬度
-    :param bd_lon:百度坐标经度
-    :return:转换后的坐标Tuple形式
-    '''
     x = bd_lon - 0.0065
     y = bd_lat - 0.006
     z = math.sqrt(x * x + y * y) - 0.00002 * math.sin(y * x_pi)
@@ -40,19 +22,8 @@ def bd09_to_gcj02(bd_lat, bd_lon):
 
 
 def Pos2Coord(full_add):
-	'''
-		@func: 通过百度地图API将地理名称转换成经纬度
-		@note: 官方文档 http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding
-		@output:
-			lng: 经度
-			lat: 纬度
-			conf: 打点绝对精度（即坐标点的误差范围）
-			comp: 描述地址理解程度。分值范围0-100，分值越大，服务对地址理解程度越高
-			level: 能精确理解的地址类型
-	'''
-
     #Add your API key as the second parameter
-	url = 'http://api.map.baidu.com/geocoding/v3/?address=%s&output=json&ak=%s'%(full_add,'3xwyzf0yaQG1jAEqDGFbnzyDEVp4wnHT')
+	url = 'http://api.map.baidu.com/geocoding/v3/?address=%s&output=json&ak=%s'%(full_add,'Your API Key')
 	res = requests.get(url)
 	if res.status_code==200:
 		val=res.json()
