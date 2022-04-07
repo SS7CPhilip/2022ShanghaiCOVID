@@ -127,7 +127,6 @@ def output(rawdata):
     return cases_dict
 
 def Baidu_geocode(rawdata):
-    #geolocator = BaiduV3(api_key='3xwyzf0yaQG1jAEqDGFbnzyDEVp4wnHT',timeout=1000,security_key='F6PkTgi3pp305BCK5GSU3hUvY7QwOoAA')
     geocode_dict = {}
     for dd in rawdata:
         for district in rawdata[dd]:
